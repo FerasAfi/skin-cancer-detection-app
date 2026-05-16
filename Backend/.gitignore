@@ -1,0 +1,89 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+.venv/
+venv/
+env/
+ENV/
+
+*.egg-info/
+dist/
+build/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# IDEs
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# ML / TensorFlow / PyTorch
+# =========================
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+
+checkpoints/
+
+# TensorFlow cache
+.cache/
+.ipynb_checkpoints/
+
+# =========================
+# FastAPI / Uvicorn
+# =========================
+*.sqlite3
+*.db
+
+# =========================
+# Supabase local (if used)
+# =========================
+.supabase/
+
+# =========================
+# Jupyter Notebooks
+# =========================
+*.ipynb_checkpoints
+
+# =========================
+# Node (if frontend exists in same repo)
+# =========================
+node_modules/
+dist/
+.next/
+out/
+
+# =========================
+# Misc
+# =========================
+tmp/
+temp/
