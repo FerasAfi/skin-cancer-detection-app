@@ -4,8 +4,11 @@ from app.api.chat_routes import router as chat_router
 from app.ml.predict_routes import router as predict_router
 from app.keys.api_key_routes import router as developer_router
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+import os
 
-
+load_dotenv()
+ORIGIN = os.getenv("ORIGIN")
 
 app = FastAPI(
     title="Skin Cancer Backend",
@@ -14,7 +17,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000"
+        ORIGIN
     ],
     allow_credentials=True,
     allow_methods=["*"],

@@ -1,39 +1,42 @@
-from google import genai
-from dotenv import load_dotenv
+import requests
 import os
+from dotenv import load_dotenv
 
 load_dotenv()
+
 API_KEY = os.getenv("GEMINI_API_KEY")
-SYSTEM_PROMPT = os.getenv("SYSTEM_PROMPT")
 
-client = genai.Client(api_key=API_KEY)
-
-
-def generate_message(text: str, history: list = None):
+URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={API_KEY}"
 
 
+def generate_message(text, history=None):
     try:
         contents = []
 
-        contents.append(SYSTEM_PROMPT)
-
-
         if history:
-            history = history[-10:]
-            contents.extend(history)
+            contents.extend(history[-10:])
 
-        contents.append(text)
+        contents.append({
+            "role": "user",
+            "parts": [{"text": text}]
+        })
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash-lite",
-            contents=contents
-        )
+        payload = {
+            "contents": contents
+        }
+
+        response = requests.post(URL, json=payload)
+
+        data = response.json()
 
         return {
-            "answer": response.text
+            "success": True,
+            "answer": data["candidates"][0]["content"]["parts"][0]["text"]
         }
 
     except Exception as e:
         return {
+            "success": False,
+            "answer": None,
             "error": str(e)
         }

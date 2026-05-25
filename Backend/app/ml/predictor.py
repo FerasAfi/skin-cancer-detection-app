@@ -7,7 +7,19 @@ def predict(image_tensor):
 
     model = get_model()
 
-    prob = model.predict(image_tensor, verbose=0)[0]
+    input_details = model.get_input_details()
+    output_details = model.get_output_details()
+
+    model.set_tensor(
+        input_details[0]['index'],
+        image_tensor.astype(np.float32)
+    )
+
+    model.invoke()
+
+    prob = model.get_tensor(
+        output_details[0]['index']
+    )[0]
 
     pred_idx = int(np.argmax(prob))
 
